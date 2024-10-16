@@ -100,8 +100,21 @@ labirinto = maze()
 
 labirinto.CreateMaze(loadMaze="maze--2024-10-16--12-13-34.csv", theme=COLOR.dark)
 
-caminho = bfs(labirinto)
+# Definir qual algoritmo usar: 'a_star' ou 'bfs'
+algoritmo_usado = 'a_star'  # Alterar para 'bfs' se quiser usar BFS
+
+if algoritmo_usado == 'a_star':
+    caminho = a_star(labirinto)
+    label_texto = 'Tamanho do caminho mais curto encontrado no algoritmo A* : '
+else:
+    caminho = bfs(labirinto)
+    label_texto = 'Tamanho do caminho mais curto encontrado no algoritmo BFS : '
+
+
+# Adicionar agente e exibir o caminho
 agente = agent(labirinto, filled=True, footprints=True, color=COLOR.red)
-labirinto.tracePath({agente:caminho}, delay=50)
-l = textLabel(labirinto,'Tamanho do caminho mais curto encontrado: ',len(caminho)+1)
+labirinto.tracePath({agente: caminho}, delay=50)
+
+# Exibir o label com o texto correto
+l = textLabel(labirinto, label_texto, len(caminho) + 1)
 labirinto.run()
