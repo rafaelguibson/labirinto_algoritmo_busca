@@ -1,4 +1,4 @@
-from pyamaze import maze
+from pyamaze import maze, agent
 
 labirinto = maze(30, 30) # é possivel passar argumentos rows e cols
 
@@ -37,5 +37,18 @@ print(mapa)
 caminho = labirinto.path
 print(caminho)
 
+#O Agente pode receber parametros (x, y) da posicaão, filled para preencher tdo o quadrado e footprint exibe o "rastro" do deslocamento percorrido
+agente = agent(labirinto, filled=True, footprints=True)
+
+#mudar posição do agente manualmente
+# agente.position = (30, 29)
+# agente.position = (30, 28)
+
+#Movendo o agente por um caminho
+#O caminho pode ser passado no mesmo formato do mapa de posições
+caminho = labirinto.path
+#o trace path recebe um dicionario labirinto.tracePath({agente:caminho})
+# Parametro delay ajusta o tempo da animação
+labirinto.tracePath({agente:caminho}, delay=300)
 #Executa o labirinto
 labirinto.run()
