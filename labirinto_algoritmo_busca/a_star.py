@@ -1,4 +1,4 @@
-from pyamaze import maze, agent, COLOR
+from pyamaze import maze, agent, COLOR, textLabel
 from queue import PriorityQueue
 
 destino = (1, 1)
@@ -63,12 +63,45 @@ def a_star(labirinto):
         celula_analisada = caminho[celula_analisada]  # atualizando para a próxima célula analisada
     return caminho_final
 
+def bfs(labirinto):
+    inicio=(labirinto.rows, labirinto.cols)
+    atual=[inicio]
+    explorado=[inicio]
+    bfs_caminho={}
+    while len(atual)>0:
+        celula_atual=atual.pop(0)
+        if celula_atual==(1,1):
+            break
+        for d in 'ESNW':
+            if labirinto.maze_map[celula_atual][d]:
+                if d=='E':
+                    proxima_celula =(celula_atual[0],celula_atual[1]+1)
+                elif d=='W':
+                    proxima_celula =(celula_atual[0],celula_atual[1]-1)
+                elif d=='N':
+                    proxima_celula =(celula_atual[0]-1,celula_atual[1])
+                elif d=='S':
+                    proxima_celula =(celula_atual[0]+1,celula_atual[1])
+                if proxima_celula  in explorado:
+                    continue
+                atual.append(proxima_celula )
+                explorado.append(proxima_celula )
+                bfs_caminho[proxima_celula ]=celula_atual
+    caminho_final={}
+    celula=(1,1)
+    while celula!=inicio:
+        caminho_final[bfs_caminho[celula]]=celula
+        celula=bfs_caminho[celula]
+    return caminho_final
 
-labirinto = maze(30,30)
 
-labirinto.CreateMaze()
+# Criação do Labirinto
+labirinto = maze()
 
-caminho = a_star(labirinto)
-agente = agent(labirinto, filled=True, footprints=True, color=COLOR.cyan)
+labirinto.CreateMaze(loadMaze="maze--2024-10-16--12-13-34.csv", theme=COLOR.dark)
+
+caminho = bfs(labirinto)
+agente = agent(labirinto, filled=True, footprints=True, color=COLOR.red)
 labirinto.tracePath({agente:caminho}, delay=50)
+l = textLabel(labirinto,'Tamanho do caminho mais curto encontrado: ',len(caminho)+1)
 labirinto.run()
