@@ -35,7 +35,7 @@ def bfs(labirinto, inicio=None):
     while celula!=(labirinto.rows, labirinto.cols):
         melhor_caminho [caminho_bfs[celula]]=celula
         celula=caminho_bfs[celula]
-    return rota ,caminho_bfs,melhor_caminho
+    return rota ,melhor_caminho
 
 if __name__=='__main__':
 
@@ -43,7 +43,7 @@ if __name__=='__main__':
 
     labirinto.CreateMaze(theme=COLOR.dark, loadMaze="maze--2024-10-16--14-52-19.csv")
 
-    bSearch,bfsPath,fwdPath=bfs(labirinto)
+    bSearch,fwdPath=bfs(labirinto)
     a=agent(labirinto, footprints=True, color=COLOR.cyan, shape='square', filled=True)
     b=agent(labirinto, footprints=True, color=COLOR.black, shape='arrow', filled=False)
     # c=agent(labirinto, 1, 1, footprints=True, color=COLOR.green, shape='square', filled=True, goal=(labirinto.rows, labirinto.cols))
@@ -53,6 +53,6 @@ if __name__=='__main__':
     labirinto.tracePath({b:fwdPath}, delay=50)
 
     # Exibir o label com o tamanho do caminho
-    l = textLabel(labirinto, 'Tamanho do caminho mais curto (BSF): ', len(fwdPath) + 1)
+    l = textLabel(labirinto, 'Tamanho do caminho mais curto (BFS): ', len(fwdPath) + 1)
 
     labirinto.run()
