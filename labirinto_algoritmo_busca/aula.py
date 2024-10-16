@@ -10,10 +10,19 @@ labirinto.CreateMaze()
 # labirinto.CreateMaze(5,5)
 
 # Salva um labirinto
+# Gera um arquivo CSV contendo a estrutura do labirinto
 # labirinto.CreateMaze(saveMaze=True)
 
+#Carregar um labirinto a partir de um CSV
+# Sempre carregará o mesmo labirinto
+# labirinto.CreateMaze(loadMaze="maze--2024-10-16--08-56-13.csv")
 
+#LoopPercente é um parametro do CreateMaze para definir o numero de caminhos possivel para solucionar o labirinto
+# Por padrão é zero, o que significa que ele so tem uma caminho possivel
+# Aumentar o valor, aumenta o numero de soluções possiveis
+# labirinto.CreateMaze(loopPercent=30)
 #Printa as celulas do labirinto
+
 celulas = labirinto.grid
 print(celulas)
 
