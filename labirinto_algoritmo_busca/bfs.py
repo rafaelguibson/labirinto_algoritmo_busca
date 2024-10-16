@@ -46,9 +46,10 @@ if __name__=='__main__':
     bSearch,bfsPath,fwdPath=bfs(labirinto)
     a=agent(labirinto, footprints=True, color=COLOR.cyan, shape='square', filled=True)
     b=agent(labirinto, footprints=True, color=COLOR.black, shape='arrow', filled=False)
-
+    # c=agent(labirinto, 1, 1, footprints=True, color=COLOR.green, shape='square', filled=True, goal=(labirinto.rows, labirinto.cols))
 
     labirinto.tracePath({a:bSearch}, delay=50)
+    # labirinto.tracePath({c:bfsPath}, delay=50)
     labirinto.tracePath({b:fwdPath}, delay=50)
 
     # Exibir o label com o tamanho do caminho

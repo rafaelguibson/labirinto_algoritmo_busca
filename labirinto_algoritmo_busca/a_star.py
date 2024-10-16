@@ -5,7 +5,8 @@ destino = (1, 1)
 
 
 def h_score(celula, destino):
-
+    # Heristica de calculo por distancia Manhattan -> d = abs(x1 - x2) + abs(y1 - y2)
+    # Distancia Euclidiana alternativa: e = sqrt(pow(x,2), pow(y,2))
     linha_atual, coluna_atual = celula
     linha_destino, coluna_destino = destino
     return abs(coluna_atual - coluna_destino) + abs(linha_atual - linha_destino)
