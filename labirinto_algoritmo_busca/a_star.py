@@ -30,7 +30,7 @@ def a_star(labirinto):
         celula = fila.get()[2]
         if celula == destino:
             break
-
+        proxima_celula = ()
         for direcao in "NSEW":
             if labirinto.maze_map[celula][direcao]:
                 if direcao == "N":
